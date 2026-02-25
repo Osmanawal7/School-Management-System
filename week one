@@ -1,0 +1,61 @@
+
+#include <string>
+#include <vector>
+#include <sstream>
+#include <fstream>
+using namespace std;
+
+// Define a Student structure to hold student information
+struct Student {
+    string indexNumber;
+    string name;
+    string program;
+};
+
+// Function to register a new student
+void registerStudent() {
+    Student newStudent;
+    cout << "\n--- Register New Student ---\n";
+    cout << "Enter student index number: ";
+    cin >> newStudent.indexNumber;
+    cout << "Enter student name: ";
+    cin.ignore();
+    getline(cin, newStudent.name);
+    cout << "Enter student program: ";
+    getline(cin, newStudent.program);
+
+    students.push_back(newStudent);
+    cout << "Student registered successfully!\n";
+}
+
+// Function to view all registered students
+void viewAllStudents() {
+    if (students.empty()) {
+        cout << "\nNo students registered yet!\n";
+        return;
+    }
+
+    cout << "\n--- Registered Students ---\n";
+    cout << "Index Number\tName\t\tProgram\n";
+    for (const auto& student : students) {
+        cout << student.indexNumber << "\t\t" << student.name << "\t" << student.program << endl;
+    }
+}
+
+// Function to search for a student by index number
+void searchStudentByIndex() {
+    string searchIndex;
+    cout << "\nEnter student index number to search: ";
+    cin >> searchIndex;
+
+    for (const auto& student : students) {
+        if (student.indexNumber == searchIndex) {
+            cout << "\n--- Student Found ---\n";
+            cout << "Index Number: " << student.indexNumber << endl;
+            cout << "Name: " << student.name << endl;
+            cout << "Program: " << student.program << endl;
+            return;
+        }
+    }
+    cout << "Student with index number '" << searchIndex << "' not found!\n";
+}
